@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+   <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+   <link rel="stylesheet" type="text/css" href="css/smartadmin-production.css">
+
+  <script  charset="utf-8" src="jquery-1.7.1.min.js"></script>
+  <script  charset="utf-8" src="cordova-2.0.0.js"></script> 
+
+    <script type="text/javascript" charset="utf-8">
+      $(function() {        
+        function addTask() {
+          $.getJSON('http://farms.herokuapp.com/api/sites', function(tasks) {            
+            $.each(tasks, function(a, val) { 
+                $('#sites').append($('<li>'+val.site_name+'</li>'));
+            });          
+          });         
+          
+        }
+
+      });
+    </script>
+  <body>
+    <div id="container">
+      <div class="well">
+
+              <div class="btn-group btn-group-justified">
+                <a href="site_form.html" class="btn btn-default">               
+                      <i class="glyphicon glyphicon-plus"></i>
+                New site</a>
+                <a href="order_form.html" class="btn btn-default">
+                   <i class="glyphicon glyphicon-plus"></i>
+                 New order</a>
+                <a href="index.html" class="btn btn-danger" >
+                
+                      <i class="glyphicon glyphicon-off"></i>
+                Logout</a>
+              </div>
+      </div>
+      <div class="well">
+        <h1>Welcome</h1>
+          
+      </div>
+    </div>
+  </body>
+</html>
+

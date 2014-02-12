@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Cordova</title>
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+
+ <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+ <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+ <link rel="stylesheet" type="text/css" href="css/smartadmin-production.css">
+
+	<script  charset="utf-8" src="jquery-1.7.1.min.js"></script>
+	<script  charset="utf-8" src="cordova-2.0.0.js"></script>	
+    <script type="text/javascript" charset="utf-8">
+      $(function() {
+        function addTask() {
+          $.getJSON('http://farms.herokuapp.com/api/sites', function(tasks) {            
+            $.each(tasks, function(a, val) { 
+                $('#sites').append($('<li>'+val.site_name+'</li>'));
+            });          
+          });
+        }
+
+        $('#new_user_session').submit(function(e) {
+          $.ajax({
+            type: "POST",
+            url: 'http://farms.herokuapp.com/api/sites/user_login',
+            data: $(this).serialize(),
+            dataType: "json",    
+            success: function (msg) 
+                    {                    
+                     $('.client-form').remove();
+                     // addTask();
+                     window.location.href= 'home.html'
+                     },
+            error: function (err)
+            { 
+              //alert(err.responseText)}
+              alert("Please enter valid username/password")
+            }
+            });
+
+          e.preventDefault();
+        });        
+
+      });
+    </script>
+  <body>
+    <div id="container">
+          
+          <form accept-charset="UTF-8"  class="smart-form smart-form client-form" id="new_user_session" method="post" novalidate="novalidate"><div style="margin:0;padding:0;display:inline"></div>
+          <header style="font-weight: bold; background: none repeat scroll 0px 0px rgb(0, 113, 188); border: 1px solid rgb(0, 113, 188); color: white;">
+            <img src="img/farms-logo.png">             
+          </header>
+
+          <fieldset>            
+            <section>
+              <label class="label" style="font-size:14px">E-mail</label>
+              <label class="input"> <i class="icon-append fa fa-user"></i>
+                <input id="user_session_username" name="user_session[username]" placeholder="username" size="30" type="text" />
+                <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> Please enter email address/username</b></label>
+            </section>
+
+            <section>
+              <label class="label" style="font-size:14px">Password</label>
+              <label class="input"> <i class="icon-append fa fa-lock"></i>
+                <input id="user_session_password" name="user_session[password]" placeholder="password" size="30" type="password" />
+                <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Enter your password</b> </label>
+<!--               <div class="note">
+                <a href="javascript:void(0)">Forgot password?</a>
+              </div>
+ -->            </section>
+
+<!--             <section style="margin-bottom:0">
+              <label class="checkbox">
+                <input type="checkbox" name="remember" checked="">
+                <i></i>Stay signed in</label>
+            </section>
+ -->          </fieldset>
+          <footer style="background:none;border:none">
+            <button type="submit" class="btn btn-primary" style="background-color: rgb(0, 113, 188);">
+              Sign in
+            </button>
+          </footer>
+
+      </form>      
+    </div>
+  </body>
+</html>
+

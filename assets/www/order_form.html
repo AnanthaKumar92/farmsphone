@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>To Do List</title>
+   
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+     <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+     <link rel="stylesheet" type="text/css" href="css/smartadmin-production.css">
+    <script  charset="utf-8" src="jquery-1.7.1.min.js"></script>
+    <script  charset="utf-8" src="cordova-2.0.0.js"></script> 
+
+    <script type="text/javascript" charset="utf-8">
+      $(function() {
+        
+          $.getJSON('http://farms.herokuapp.com/api/orders/get_bins', function(bins) {            
+            $.each(bins, function(a, val) { 
+                $('select.bins').append($('<option value='+val[1]+'>'+val[0]+'</option>'));
+            });          
+          });                  
+
+          $.getJSON('http://farms.herokuapp.com/api/orders/get_sites', function(bins) {            
+            $.each(bins, function(a, val) { 
+                $('#order_site_id').append($('<option value='+val[1]+'>'+val[0]+'</option>'));
+            });          
+          });                  
+
+        remove_fields = function(link) {
+        $(link).prev("input[type=hidden]").val("1");
+        return $(link).closest(".fields").hide();
+        };
+
+        window.remove_fields = remove_fields;
+
+        add_table_fields = function(link, association) {
+        var content = $('tr.fields:eq(0)').clone().html();
+        var new_id, regexp;
+        new_id = new Date().getTime();
+        regexp = new RegExp("new_" + association, "g");
+        return $("#" + association).append("<tr class='fields'>"+content.replace(regexp, new_id)+"</tr>");
+        };
+        function Add () {
+          alert("Order submitted successfully")
+        }
+
+        $('#new_order').submit(function(e) {
+          $.post('http://farms.herokuapp.com/api/orders', $(this).serialize(), Add);
+          this.reset();          
+          window.location.href= 'home.html'
+          e.preventDefault();
+        });
+
+      });
+    </script>
+  <body>
+    <div id="container">    
+      <section id="widget-grid" class="">        
+  <div class="row">
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  <!--<div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-colorbutton="true" >-->
+           <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-7" data-widget-togglebutton="false" data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false">
+
+            <header>
+                <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                <h2>New order</h2>        
+            </header>
+            <div>
+                <div class="jarviswidget-editbox">          
+                </div>  
+                <div class="widget-body">            
+          
+        <form accept-charset="UTF-8" id="new_order"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"><input name="authenticity_token" type="hidden" value="D3YhO/DKZ78MMTi00fWUjvOOnGOCPTrbJu/U7uKilwU="></div>
+    <fieldset>
+      <div class="row">
+        <div class="col-sm-12 pull-left">
+          <label for="order_name">Name</label>
+          <input class="form-control" id="order_name" name="order[name]" size="30" type="text">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6 pull-left">        
+          <label for="order_phone">Phone</label>
+          <input class="form-control" id="order_phone" name="order[phone]" size="30" type="text">
+        </div>   
+      <div class="col-sm-6 pull-left"> 
+        <label for="order_site">Site</label>
+        <select class="form-control" id="order_site_id" name="order[site_id]"><option value="">Select site</option>
+        </select>
+      </div>
+    </div>
+    </fieldset>
+    <br>
+    <fieldset>
+      <div class="row">
+        <table class="table">
+      <tbody id="order_bins">
+        
+          <tr class="fields">
+  <td>
+  <label for="order_order_bins_attributes_0_bin">Bin</label>
+  <select class="form-control bins" id="order_order_bins_attributes_0_bin_id" name="order[order_bins_attributes][0][bin_id]"><option value="">Select Bin</option>
+
+  </select>
+  </td> 
+  <td>
+  
+          <label for="order_order_bins_attributes_0_tons">Tons</label>
+          <input class="form-control" id="order_order_bins_attributes_0_tons" name="order[order_bins_attributes][0][tons]" size="30" type="text">
+   </td>    
+    <td>
+        <input id="order_order_bins_attributes_0__destroy" name="order[order_bins_attributes][0][_destroy]" type="hidden" value="false"><a class="btn btn-danger btn-xs" href="#" onclick="remove_fields(this); return false;">Delete</a>
+  
+  </td>
+</tr>
+
+      </tbody>
+    </table>
+  </div>
+   <a class="btn btn-primary btn-xs" href="#" onclick="add_table_fields(this, 'order_bins'); return false;">+ Add bin</a>
+    </fieldset>
+
+    <fieldset>
+      <div class="row">
+      
+      <div class="col-sm-6 pull-left" style="padding-left:12px"> 
+       <label for="order_early_delivery_date">Early delivery date</label>
+     <div class="form-group">
+      <div class=" input-group">
+        <input as="datetime_picker" class="form-control hasDatepicker" id="order_early_delivery_date" name="order[early_delivery_date]" size="30" type="text">
+        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+      </div>
+      </div></div>
+ 
+
+     <div class="col-sm-6 pull-left" style="padding-left:12px"> 
+        <label for="order_late_delivery_date">Late delivery date</label>
+           <div class="form-group">
+      <div class=" input-group">
+       
+        <input as="datetime_picker" class="form-control  hasDatepicker" id="order_late_delivery_date" name="order[late_delivery_date]" size="30" type="text">
+        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+      </div>
+      </div>
+      
+   </div>
+
+
+
+   <div class="row">
+      <div class="col-sm-12 pull-left" style="padding-left: 30px; padding-right: 25px;"> 
+        <label for="order_comment">Comment</label>
+        <input class="form-control" id="order_comment" name="order[comment]" size="30" type="text">
+      </div>
+    </div> 
+  </div></fieldset>
+  <div class="form-actions">
+    <div style="float:left">
+      <a href="home.html" class="btn btn-labeled btn-danger" id="back">
+        <span class="btn-label">
+          <i class="fa fa-mail-reply-all"></i>  
+        </span>Back
+      </a>
+    </div>
+    <button type="Submit" class="btn btn-labeled btn-primary">    
+      <span class="btn-label">
+        <i class="fa fa-save"></i>  
+      </span>Submit  
+    </button>
+    </div>
+</form>
+        </div>
+
+    </div>
+
+
+          </div>      
+      </article>
+    </div>
+ </section>
+  </body>
+</html>
+
