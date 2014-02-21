@@ -1,229 +1,237 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Orders</title>
+   <head>
+      <title>Orders</title>
+      <meta id="extViewportMeta" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+      <meta name="apple-mobile-web-app-capable" content="yes">
+      <link rel="stylesheet" href="css/font-awesome.min.css" />
 
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-     <link rel="stylesheet" href="css/jquery.mobile-1.3.2.min.css">
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-    <script src="js/jquery-1.8.3.min.js"></script>
-    <script src="js/jquery.mobile-1.3.2.min.js"></script>
+    <!-- jQueryMobileCSS - original without styling -->
+        <link rel="stylesheet" href="css/jquerymobile.css" />
 
-    <script  charset="utf-8" src="js/cordova-2.0.0.js"></script>
-    <style>
-  #popupPanel-popup {
-      right: auto !important;
-      left:  0 !important;
-  }
-  #popupPanel {
-      width: 200px;
-      border: 1px solid #000;
-      border-right: none;
-      background: rgba(0,0,0,.5);
-      margin: -1px 0;
-  }
-  #popupPanel .ui-btn {
-      margin: 2em 15px;
-  }
-.topheader
-{
-  background: #0071BC;
-}
-#menu{
-  background: #004F82;
-  color: white;
-}
+    <!-- nativeDroid core CSS -->
+        <link rel="stylesheet" href="css/jquerymobile.nativedroid.css" />
+
+    <!-- nativeDroid: Light/Dark -->
+        <link rel="stylesheet" href="css/jquerymobile.nativedroid.light.css"  id='jQMnDTheme' />
+
+    <!-- nativeDroid: Color Schemes -->
+        <link rel="stylesheet" href="css/jquerymobile.nativedroid.color.green.css" id='jQMnDColor' />
+
+    <!-- jQuery / jQueryMobile Scripts -->
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
 
 
-
-</style>
-
-    <script type="text/javascript" charset="utf-8">
-      $(function() {
-
-          $.getJSON('http://192.168.2.7:3000/api/orders/get_bins', function(bins) {
-            $.each(bins, function(a, val) {
-                $('select.bins').append($('<option value='+val[1]+'>'+val[0]+'</option>'));
-                $('select.bins').listview('refresh');
-            });
-          });
-
-          $.getJSON('http://192.168.2.7:3000/api/orders/get_sites', function(bins) {
-            $.each(bins, function(a, val) {
-                $('#order_site_id').append($('<option value='+val[1]+'>'+val[0]+'</option>'));
-                $('#order_site_id').listview('refresh');
-            });
-          });
-
-        remove_fields = function(link) {
-        $(link).prev("input[type=hidden]").val("1");
-        return $(link).closest(".fields").hide();
-        };
-
-        window.remove_fields = remove_fields;
-
-        add_table_fields = function(link, association) {
-        var content = $('tr.fields:eq(0)').clone().html();
-        var new_id, regexp;
-        new_id = new Date().getTime();
-        regexp = new RegExp("new_" + association, "g");
-        return $("#" + association).append("<tr class='fields'>"+content.replace(regexp, new_id)+"</tr>");
-        };
-        function Add () {
-          alert("Order submitted successfully")
-        }
-
-        $('#new_order').submit(function(e) {
-          $.post('http://farms.herokuapp.com/api/orders', $(this).serialize(), Add);
-          this.reset();
-          window.location.href= 'home.html'
-          e.preventDefault();
-        });
-        $( "#popupPanel" ).on({
-      popupbeforeposition: function() {
-        var h = $( window ).height();
-        $( "#popupPanel" ).css( "height", h );
-      }
-  });
-
-s      });
-    </script>
-  <body>
-    <div id="container">
-      <section id="widget-grid" class="">
-  <div class="row">
-        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-  
-           <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-7" data-widget-togglebutton="false" data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false">
-
-           <div data-role="header" class="topheader">
-            <a href="#popupPanel" data-rel="popup" ,data-transition="slide", data-direction="reverse" data-position-to="window" id="menu">Menu</a>
-            <h1>Orders</h1>
-            <a href="index.html" id="menu">Logout</a>
-          </div>
-            <div>
-              <div class="jarviswidget-editbox">          
-                </div>  
-            <div class="widget-body">            
-          
-        <form accept-charset="UTF-8" id="new_order"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"><input name="authenticity_token" type="hidden" value="D3YhO/DKZ78MMTi00fWUjvOOnGOCPTrbJu/U7uKilwU="></div>
-    <fieldset>
-      <div class="row">
-        <div class="col-sm-12 pull-left">
-          <label for="order_name">Name</label>
-          <input class="form-control" id="order_name" name="order[name]" size="30" type="text">
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-6 pull-left">        
-          <label for="order_phone">Phone</label>
-          <input class="form-control" id="order_phone" name="order[phone]" size="30" type="text">
-        </div>   
-      <div class="col-sm-6 pull-left"> 
-        <label for="order_site">Site</label>
-        <select class="form-control" id="order_site_id" name="order[site_id]"><option value="">Select site</option>
-        </select>
-      </div>
-    </div>
-    </fieldset>
-    <br>
-    <fieldset>
-      <div class="row">
-        <table class="table">
-      <tbody id="order_bins">
-        
-          <tr class="fields">
-  <td>
-  <label for="order_order_bins_attributes_0_bin">Bin</label>
-  <select class="form-control bins" id="order_order_bins_attributes_0_bin_id" name="order[order_bins_attributes][0][bin_id]"><option value="">Select Bin</option>
-
-  </select>
-  </td> 
-  <td>
-  
-          <label for="order_order_bins_attributes_0_tons">Tons</label>
-          <input class="form-control" id="order_order_bins_attributes_0_tons" name="order[order_bins_attributes][0][tons]" size="30" type="text">
-   </td>    
-    <td>
-        <input id="order_order_bins_attributes_0__destroy" name="order[order_bins_attributes][0][_destroy]" type="hidden" value="false"><a class="btn btn-danger btn-xs" href="#" data-role="button" data-icon="" onclick="remove_fields(this); return false;">Delete</a>
-  
-  </td>
-</tr>
-
-      </tbody>
-    </table>
-  </div>
-   <a class="btn btn-primary btn-xs" href="#" onclick="add_table_fields(this, 'order_bins'); return false;" style="color:white">+ Add bin</a>
-    </fieldset>
-
-    <fieldset>
-      <div class="row">
-      
-      <div class="col-sm-6 pull-left" style="padding-left:12px"> 
-       <label for="order_early_delivery_date">Early delivery date</label>
-     <div class="form-group">
-      <div class=" input-group">
-        <input as="datetime_picker" class="form-control hasDatepicker" id="order_early_delivery_date" name="order[early_delivery_date]" size="30" type="text">
-        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-      </div>
-      </div></div>
+  <script src="js/nativedroid.script.js"></script>
+  <script  charset="utf-8" src="js/cordova-2.0.0.js"></script>
  
+      <script type="text/javascript" charset="utf-8">
+         $(function() {
 
-     <div class="col-sm-6 pull-left" style="padding-left:12px"> 
-        <label for="order_late_delivery_date">Late delivery date</label>
-           <div class="form-group">
-      <div class=" input-group">
-       
-        <input as="datetime_picker" class="form-control  hasDatepicker" id="order_late_delivery_date" name="order[late_delivery_date]" size="30" type="text">
-        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-      </div>
-      </div>
-      
-   </div>
+          $.ajax({
+            type: "GET",
+            url: 'http://farms.herokuapp.com/api/orders/get_bins',
+            data: $(this).serialize(),
+            dataType: "jsonp",
+            cache: false,
+             success: function(data) {
+                            console.log(data)
+                $.each(data, function(a, val) {
+                    $('select.bins').append($('<option value='+val[1]+'>'+val[0]+'</option>'));
+                });
+                 $('select.bins').listview();               
+            },
+
+            error: function(data,status){
+              alert('Bin is empty')
+            },
+
+            complete: function(data){
+              // alert('completed')
+            },
+
+            denied: function(data){
+              alert('Access denied')
+            }
+          });
+            
+            $.ajax({
+            type: "GET",
+            url: 'http://farms.herokuapp.com/api/orders/get_sites',
+            data: $(this).serialize(),
+            dataType: "jsonp",
+            cache: false,
+             success: function(data) {      
+              
+                $.each(data, function(a, val) {
+                
+                   $('#order_site_id').append($('<option value='+val[1]+'>'+val[0]+'</option>'))
+                 });
+
+               $('#order_site_id').listview(); 
+               
+            },
+
+            error: function(data,status){
+              alert('Bin is empty')
+            },
+
+            complete: function(data){
+              // alert('completed')
+            },
+
+            denied: function(data){
+              alert('Access denied')
+            }
+          });
+   
+
+            // $.getJSON('http://192.168.0.111:3000/api/orders/get_bins', function(bins) {
+            //    $.each(bins, function(a, val) {
+                  
+
+            //        $('select.bins').append($('<option value='+val[1]+'>'+val[0]+'</option>'));
+              
+            //    });
+            //  });
+         
+            //  $.getJSON('http://192.168.0.111:3000/api/orders/get_sites', function(bins) {
+            //    $.each(bins, function(a, val) {
+            //        $('#order_site_id').append($('<option value='+val[1]+'>'+val[0]+'</option>'));
+             
+            //    });
+            //  });
+         
+           remove_fields = function(link) {
+           $(link).prev("input[type=hidden]").val("1");
+           return $(link).closest(".fields").hide();
+           };
+         
+           window.remove_fields = remove_fields;
+         
+           add_table_fields = function(link, association) {
+           var content = $('tr.fields:eq(0)').clone().html();
+           var new_id, regexp;
+           new_id = new Date().getTime();
+           regexp = new RegExp("new_" + association, "g");
+           return $("#" + association).append("<tr class='fields'>"+content.replace(regexp, new_id)+"</tr>");
+           };
+           function Add () {
+             alert("Order submitted successfully")
+           }
+         
+           $('#new_order').submit(function(e) {
+              $.ajax({
+              type: "GET",
+              url: 'http://farms.herokuapp.com/api/orders/new_order',
+              data: $(this).serialize(),
+              dataType: "jsonp",
+              cache: false,
+               success: function(data) {
+                 alert('Order Created successfully')
+                $('#new_order')[0].reset();
+                return false
+              },
+
+              error: function(data,status){
+                alert('Please try again.')
+              },
+
+              complete: function(data){
+                // alert('completed')
+              },
+
+              denied: function(data){
+                alert('Access denied')
+              }
+            });
+            return false
+            e.preventDefault()   
+           });
 
 
+         });
+      </script>
+      <style>
+        #heading
+        {
+          background-color: #0071BC;
+          color: white;
+        }
+        #heading_menu{
+          background-color: #B6DB49;  
+        }
+      </style>
+   <body>
+   <div data-role="page" id="demo-page" data-url="demo-page" data-theme="b">
+    <div data-role="header" id="heading" data-theme="b">
+        <a href="#left-panel"><i class='icon-reorder'></i></a>
+        <h1>New Order</h1>
+    </div><!-- /header -->
+    <div role="main" class="ui-content">
+         <form accept-charset="UTF-8" id="new_order">
+               <div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"><input name="authenticity_token" type="hidden" value="D3YhO/DKZ78MMTi00fWUjvOOnGOCPTrbJu/U7uKilwU="></div>
+            
 
-   <div class="row">
-      <div class="col-sm-12 pull-left" style="padding-left: 30px; padding-right: 25px;"> 
-        <label for="order_comment">Comment</label>
-        <input class="form-control" id="order_comment" name="order[comment]" size="30" type="text">
-      </div>
-    </div> 
-  </div></fieldset>
-  <div class="form-actions">
-    <div style="float:left">
-      <a href="home.html" class="btn btn-labeled btn-danger" id="back">
-        <span class="btn-label">
-          <i class="fa fa-mail-reply-all"></i>  
-        </span>Back
-      </a>
-    </div>
-    <button type="Submit" class="btn btn-labeled btn-primary">    
-      <span class="btn-label">
-        <i class="fa fa-save"></i>  
-      </span>Submit  
-    </button>
-    </div>
-    <div data-role="content">
-     
-    <div data-role="popup" id="popupPanel" data-corners="false" data-theme="none" data-shadow="false" data-tolerance="0,0">
-      <ul data-role="listview" id="menuitem">
-          <li><a href="site_form.html"  id="menu">Sites</a></li>
-          <li><a href="order_form.html" id="menu">Orders</a></li>
-      </ul>
-  </div>
-  </div>
-</form>
-        </div>
+                <label for="order_name">Name</label>
+                <input class="form-control" id="order_name" name="order[name]" size="30" type="text">
 
-    </div>
+                <label for="order_phone">Phone</label>
+                <input class="form-control" id="order_phone" name="order[phone]" size="30" type="text">
 
+                <label for="order_site">Site</label>
+                <select class="form-control" id="order_site_id" name="order[site_id]">
+                  <option value="">Select site</option>
+                </select>
+                 <table class="table">
+                    <tbody id="order_bins">
+                       <tr class="fields">
+                          <td>
+                             <label for="order_order_bins_attributes_0_bin">Bin</label>
+                             <select class="form-control bins" id="order_order_bins_attributes_0_bin_id" name="order[order_bins_attributes][0][bin_id]">
+                                <option value="">Select Bin</option>
+                             </select>
+                          </td>
+                          <td>
+                             <label for="order_order_bins_attributes_0_tons">Tons</label>
+                             <input class="form-control" id="order_order_bins_attributes_0_tons" name="order[order_bins_attributes][0][tons]" size="30" type="text">
+                          </td>
+                          <td>
+                             <input id="order_order_bins_attributes_0__destroy" name="order[order_bins_attributes][0][_destroy]" type="hidden" value="false"><a href="#" class="icon-remove-circle" onclick="remove_fields(this); return false;"></a>
+                          </td>
+                       </tr>
+                    </tbody>
+                 </table>
+                  <a  class="icon-plus" data-mini='true' href="#" onclick="add_table_fields(this, 'order_bins'); return false;"> Add bin</a>
 
-          </div>      
-      </article>
-    </div>
- </section>
- </div>
-  </body>
+                  <label for="order_early_delivery_date">Early delivery date</label>
+                  <input  data-role="date" class="form-control" id="order_early_delivery_date" name="order[early_delivery_date]" type="date" value="" data-clear-btn="true">
+                  
+                  <label for="order_late_delivery_date">Late delivery date</label>
+                  <input data-role="date" name="order[late_delivery_date]" type="date" data-clear-btn="true">
+
+                   <label for="order_comment">Comment</label>
+                   <textarea  id="order_comment" name="order[comment]"> </textarea>
+
+                  <button type="Submit" class="btn btn-labeled btn-primary">Submit  
+                  </button>
+            </form>
+
+      </div><!-- /content -->
+      <div data-role="panel" id="left-panel" data-theme="a">
+          
+          <!-- <a href="#" data-rel="close" class="ui-btn ui-corner-all ui-shadow ui-mini ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-right">Close</a> -->
+          <ul data-role='listview'>
+
+             <li data-role="list-divider" id="heading_menu">Menu</li>
+              <li><a href="home.html" data-ajax='false' rel="external"><i class='icon-dashboard'></i> Dashboard</a></li>
+              <li><a href="order_form.html" data-ajax='false' rel="external"><i class='icon-edit'></i> New Order</a></li>
+              <li><a href="site_form.html" data-ajax='false' rel="external"><i class='icon-edit-sign'></i> New Site</a></li>
+              <li><a href="index.html" data-ajax='false' rel="external"><i class='icon-signout'></i> Logout</a></li>
+          </ul>
+      </div> 
+  </div> 
+
+   </body>
 </html>
-
