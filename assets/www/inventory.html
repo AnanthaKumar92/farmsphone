@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta id="extViewportMeta" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+    <link rel="stylesheet" href="css/jquerymobile.css" />
+    <link rel="stylesheet" href="css/jquerymobile.nativedroid.css" />
+    <link rel="stylesheet" href="css/jquerymobile.nativedroid.light.css"  id='jQMnDTheme' />
+    <link rel="stylesheet" href="css/jquerymobile.nativedroid.color.green.css" id='jQMnDColor' />
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
+    <script src="js/nativedroid.script.js"></script>
+     <script src="js/authorize_page.js"></script>
+    <script  charset="utf-8" src="js/cordova-2.0.0.js"></script>
+
+    <script type="text/javascript" charset="utf-8">
+      $(function() {
+           $('#new_report').submit(function(e) {
+              $.ajax({
+              type: "GET",
+              url: 'http://farms.herokuapp.com/api/orders/reports',
+              data: $(this).serialize(),
+              dataType: "jsonp",
+              cache: false,
+               success: function(data) {
+                 alert('Reports Created successfully')
+                $('#new_report')[0].reset();
+                return false
+              },
+
+              error: function(data,status){
+                alert('Please try again.')
+              },
+
+              complete: function(data){
+                // alert('completed')
+              },
+
+              denied: function(data){
+                alert('Access denied')
+              }
+            });
+            return false
+            e.preventDefault()   
+           });
+
+
+         });
+      function user_logout() {
+        window.localStorage.removeItem('login_token');
+        window.location ='index.html'
+      }
+      function check_treat(){
+        if($('#treatment').is(':checked'))
+          window.location ='#demo-page4'
+        else
+          window.location ='#demo-page5' 
+      }
+      function check_pig_death(){
+        if($('#death').is(':checked'))
+          window.location ='#demo-page2'
+        else
+          window.location ='#demo-page3'
+      }
+    </script>
+    <style>
+        #heading
+        {
+          background-color: #0071BC;
+          color: white;
+          margin-top: -10px;
+        }
+        #heading_menu{
+          background-color: #B6DB49;  
+        }
+      </style>
+  <body>
+        <form accept-charset="UTF-8" id="new_report">
+          <div style="margin:0;padding:0;display:inline">
+            <input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="pgAi9Q3p8baqCnCdK00HkzTgnR62f/IxJ9oPdvMDBaw=" />
+          </div>
+          <div data-role="page" id="demo-page1" data-url="demo-page1" data-theme="b">
+            <div data-role="header" id="heading" class="topheader" data-theme="b">
+              <a href="#left-panel"><i class='icon-reorder'></i></a>
+              <h1>New Inventory</h1>
+            </div><!-- /header -->
+            <div role="main" class="ui-content">
+             <ul data-role="listview" data-inset="true">
+              <fieldset>
+                <li data-role="fieldcontain">
+                  <label for="month_of_inventory" class="select">Month Of Inventory</label>
+                    <select name="select-choice-1" id="month_of_inventory" data-native-menu="true">
+                      <option value="January">January</option>
+                      <option value="February">February</option>
+                      <option value="March">March</option>
+                      <option value="April">April</option>
+                      <option value="May">May</option>
+                      <option value="June">June</option>
+                      <option value="July">July</option>
+                      <option value="August">August</option>
+                      <option value="September">September</option>
+                      <option value="October">October</option>
+                      <option value="November">November</option>
+                      <option value="December">December</option>
+                    </select>
+                </li>
+                <li data-role="fieldcontain">
+                  <label for="date">Date</label>
+                  <input id="report_date" name="report[date]" type="date">
+                </li>
+                <li data-role="fieldcontain">
+                  <fieldset data-role="controlgroup">
+                    <input type="checkbox" name="death" id="death" checked="">
+                    <label for="death">Is There any pig Death</label>
+                  </fieldset>
+                </li>
+               </fieldset>
+              </ul>
+              <a href="#" onclick="check_pig_death()" style="float:right"><i class='icon-circle-arrow-right'>NEXT</i></a>
+            </div>
+            <div data-role="panel" id="left-panel" data-theme="a">
+              <ul data-role='listview'>
+                <li data-role="list-divider" id="heading_menu">Menu</li>
+                <li><a href="home.html" data-ajax='false' rel="external"><i class='icon-dashboard'></i> Dashboard</a></li>
+                <li><a href="inventory.html" data-ajax='false' rel="external"><i class='icon-dashboard'></i> Inventory</a></li>
+                <li><a href="shipments.html" data-ajax='false' rel="external"><i class='icon-dashboard'></i> Shipment</a></li>
+                <li><a href="order_form.html" data-ajax='false' rel="external"><i class='icon-edit'></i> New Order</a></li>
+                <li><a href="site_form.html" data-ajax='false' rel="external"><i class='icon-edit-sign'></i> New Site</a></li>
+                <li><a href="#" data-ajoutax='false' onclick="user_logout();" rel="external"><i class='icon-signout'></i> Logout</a></li>
+              </ul>
+             </div>
+          </div>
+          <div data-role="page" id="demo-page2" data-url="demo-page2" data-theme="b">
+            <div data-role="header" id="heading" class="topheader" data-theme="b">
+              <a href="#left-panel"><i class='icon-reorder'></i></a>
+              <h1>New Inventory</h1>
+            </div><!-- /header -->
+            <div role="main" class="ui-content">
+             <ul data-role="listview" data-inset="true">
+              <fieldset>
+                <li data-role="fieldcontain">
+                  <label for="report_number_of_pig_deaths">Number of Pigs Death</label>
+                  <input  id="report_number_of_pig_deaths" name="report[number_of_pig_deaths]" type="text">
+                </li>
+                <li data-role="fieldcontain">
+                  <label for="report_death_reason" class="select">Cause Of Death</label>
+                    <select name="select-choice-2"id="report_death_reason" name="report[death_reason]" data-native-menu="true" type="text">
+                      <option value="Belly Rupture">Belly Rupture</option>
+                      <option value="Scrotal Rupture">Scrotal Rupture</option>
+                      <option value="Lame/BadLeg">Lame/BadLeg</option>
+                      <option value="Humpback">Humpback</option>
+                      <option value="Strep">Strep</option>
+                      <option value="Greasy pig">Greasy pig</option>
+                      <option value="Tail Bite">Tail Bite</option>
+                      <option value="Prolapse">Prolapse</option>
+                      <option value="Abcess">Abcess</option>
+                      <option value="Hematoma Ear">Hematoma Ear</option>
+                      <option value="Euthanized">Euthanized</option>
+                    </select>
+                </li>
+               </fieldset>
+              </ul>
+              <a href="#demo-page1" style="float:left"><i class='icon-circle-arrow-left'></i>PREVIOUS</a>
+              <a href="#demo-page3" style="float:right"><i class='icon-circle-arrow-right'>NEXT</i></a>
+            </div>
+            <div data-role="panel" id="left-panel" data-theme="a">
+              <ul data-role='listview'>
+                <li data-role="list-divider" id="heading_menu">Menu</li>
+                <li><a href="home.html" data-ajax='false' rel="external"><i class='icon-dashboard'></i> Dashboard</a></li>
+                <li><a href="inventory.html" data-ajax='false' rel="external"><i class='icon-dashboard'></i> Inventory</a></li>
+                <li><a href="shipments.html" data-ajax='false' rel="external"><i class='icon-dashboard'></i> Shipment</a></li>
+                <li><a href="order_form.html" data-ajax='false' rel="external"><i class='icon-edit'></i> New Order</a></li>
+                <li><a href="site_form.html" data-ajax='false' rel="external"><i class='icon-edit-sign'></i> New Site</a></li>
+                <li><a href="#" data-ajoutax='false' onclick="user_logout();" rel="external"><i class='icon-signout'></i> Logout</a></li>
+              </ul>
+             </div>
+          </div>
+          <div data-role="page" id="demo-page3" data-url="demo-page3" data-theme="b">
+            <div data-role="header" id="heading" class="topheader" data-theme="b">
+              <a href="#left-panel"><i class='icon-reorder'></i></a>
+              <h1>New Site</h1>
+            </div><!-- /header -->
+            <div role="main" class="ui-content">
+              <ul data-role="listview" data-inset="true">
+                <li data-role="fieldcontain">
+                  <label for="report_running_inventory">Running Inventory</label>
+                  <input id="report_running_inventory" name="report[running_inventory]"  type="text">
+                </li>
+                 <li data-role="fieldcontain">
+                  <fieldset data-role="controlgroup">
+                    <input type="checkbox" name="treatment" id="treatment" checked="">
+                    <label for="treatment">Is There any pigs Treated</label>
+                  </fieldset>
+                </li>
+                <br/>
+                <a href="#demo-page1" style="float:left"><i class='icon-circle-arrow-left'></i>PREVIOUS</a>
+                <a href="#" onclick="check_treat()" style="float:right"><i class='icon-circle-arrow-right'></i>NEXT</a>
+              </ul>
+            </div>
+            <div data-role="panel" id="left-panel" data-theme="a">
+              <ul data-role='listview'>
+                <li data-role="list-divider" id="heading_menu">Menu</li>
+                <li><a href="home.html" data-ajax='false' rel="external"><i class='icon-dashboard'></i> Dashboard</a></li>
+                <li><a href="inventory.html" data-ajax='false' rel="external"><i class='icon-dashboard'></i> Inventory</a></li>
+                <li><a href="shipments.html" data-ajax='false' rel="external"><i class='icon-dashboard'></i> Shipment</a></li>
+                <li><a href="order_form.html" data-ajax='false' rel="external"><i class='icon-edit'></i> New Order</a></li>
+                <li><a href="site_form.html" data-ajax='false' rel="external"><i class='icon-edit-sign'></i> New Site</a></li>
+                <li><a href="#" data-ajoutax='false' onclick="user_logout();" rel="external"><i class='icon-signout'></i> Logout</a></li>
+              </ul>
+             </div>
+          </div>
+          <div data-role="page" id="demo-page4" data-url="demo-page4" data-theme="b"> 
+            <div data-role="header" id="heading" class="topheader" data-theme="b">
+              <a href="#left-panel"><i class='icon-reorder'></i></a>
+              <h1>New Site</h1>
+            </div><!-- /header --> 
+            <div role="main" class="ui-content">
+              <ul data-role="listview" data-inset="true">
+                <fieldset>
+                  <li data-role="fieldcontain">
+                    <label for="report_number_of_pigs_treated">Number of Pigs Treated </label>
+                    <input class="form-control"id="report_number_of_pigs_treated" name="report[number_of_pigs_treated]" type="text">
+                  </li>
+                  <li data-role="fieldcontain">
+                    <label for="report_name_of_product_given">Name of Medicine given</label>
+                    <input class="form-control" id="report_name_of_product_given" name="report[name_of_product_given]" type="text" />
+                  </li>
+                  <li data-role="fieldcontain">
+                    <label for="report_amount_given">Dosage Amount</label>
+                    <input class="form-control" id="report_amount_given" name="report[amount_given]" type="text" />
+                  </li>
+                  <li data-role="fieldcontain">
+                    <label for="report_route_of_admin">How Administered</label>
+                    <input class="form-control" id="report_route_of_admin" name="report[route_of_admin]" type="text" />
+                  </li>
+                </fieldset>
+              </ul>
+              <a href="#demo-page1" style="float:left"><i class='icon-circle-arrow-left'>PREVIOUS</i></a>
+               <a href="#demo-page5" style="float:right"><i class='icon-circle-arrow-right'></i>NEXT</a>
+            </div>
+            <div data-role="panel" id="left-panel" data-theme="a">
+              <ul data-role='listview'>
+                <li data-role="list-divider" id="heading_menu">Menu</li>
+                <li><a href="home.html" data-ajax='false' rel="external"><i class='icon-dashboard'></i> Dashboard</a></li>
+                <li><a href="inventory.html" data-ajax='false' rel="external"><i class='icon-dashboard'></i> Inventory</a></li>
+                <li><a href="shipments.html" data-ajax='false' rel="external"><i class='icon-dashboard'></i> Shipment</a></li>
+                <li><a href="order_form.html" data-ajax='false' rel="external"><i class='icon-edit'></i> New Order</a></li>
+                <li><a href="site_form.html" data-ajax='false' rel="external"><i class='icon-edit-sign'></i> New Site</a></li>
+                <li><a href="#" data-ajoutax='false' onclick="user_logout();" rel="external"><i class='icon-signout'></i> Logout</a></li>
+              </ul>
+            </div>
+          </div>
+          <div data-role="page" id="demo-page5" data-url="demo-page5" data-theme="b"> 
+            <div data-role="header" id="heading" class="topheader" data-theme="b">
+              <a href="#left-panel"><i class='icon-reorder'></i></a>
+              <h1>New Site</h1>
+            </div><!-- /header --> 
+            <div role="main" class="ui-content">
+              <ul data-role="listview" data-inset="true">
+                <fieldset>
+                  <li data-role="fieldcontain">
+                    <label for="report_initials">User Initials</label>
+                    <input class="form-control"  id="report_initials" name="report[initials]" type="text" />
+                  </li>
+                </fieldset>
+                <button type="Submit" class="btn btn-labeled btn-primary">
+                  Submit
+                </button>
+              </ul>
+              <a href="#demo-page3" style="float:left"><i class='icon-circle-arrow-left'>PREVIOUS</i></a>
+            </div>
+            <div data-role="panel" id="left-panel" data-theme="a">
+              <ul data-role='listview'>
+                <li data-role="list-divider" id="heading_menu">Menu</li>
+                <li><a href="home.html" data-ajax='false' rel="external"><i class='icon-dashboard'></i> Dashboard</a></li>
+                 <li><a href="inventory.html" data-ajax='false' rel="external"><i class='icon-dashboard'></i> Inventory</a></li>
+                <li><a href="shipments.html" data-ajax='false' rel="external"><i class='icon-dashboard'></i> Shipment</a></li>
+                <li><a href="order_form.html" data-ajax='false' rel="external"><i class='icon-edit'></i> New Order</a></li>
+                <li><a href="site_form.html" data-ajax='false' rel="external"><i class='icon-edit-sign'></i> New Site</a></li>
+                <li><a href="#" data-ajoutax='false' onclick="user_logout();" rel="external"><i class='icon-signout'></i> Logout</a></li>
+              </ul>
+            </div>
+          </div>
+        </form>   
+  </body>
+</html>
+
