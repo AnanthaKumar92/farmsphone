@@ -15,39 +15,6 @@
     <script src="js/nativedroid.script.js"></script>
      <script src="js/auth.js"></script>
     <script  charset="utf-8" src="js/cordova-2.0.0.js"></script>
-    <script type="text/javascript" charset="utf-8">
-      $(function() {
-        
-
-        $('#new_user_session').submit(function(e) {
-          $.ajax({
-            type: "GET",
-            url: 'http://farms.herokuapp.com/api/sites/user_login',
-            data: $(this).serialize(),
-	          dataType: "jsonp",
-	          cache: false,
-             success: function(data) {
-               window.location.href="home.html";
-            },
-
-            error: function(data,status){
-  	          alert('Invalid username/password')
-            },
-
-            complete: function(data){
-  			      // alert('completed')
-            },
-
-            denied: function(data){
-  				    alert('Access denied')
-            }
-          });
-            return false
-          e.preventDefault();
-        });
-
-      });
-    </script>
     <style>
         #heading
         {
