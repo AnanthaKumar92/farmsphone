@@ -1,30 +1,18 @@
 <!DOCTYPE html>
 <html>
   <head>
-   <meta id="extViewportMeta" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <link rel="stylesheet" href="css/font-awesome.min.css" />
-
-		<!-- jQueryMobileCSS - original without styling -->
-        <link rel="stylesheet" href="css/jquerymobile.css" />
-
-		<!-- nativeDroid core CSS -->
-        <link rel="stylesheet" href="css/jquerymobile.nativedroid.css" />
-
-		<!-- nativeDroid: Light/Dark -->
-        <link rel="stylesheet" href="css/jquerymobile.nativedroid.light.css"  id='jQMnDTheme' />
-
-		<!-- nativeDroid: Color Schemes -->
-        <link rel="stylesheet" href="css/jquerymobile.nativedroid.color.green.css" id='jQMnDColor' />
-
-		<!-- jQuery / jQueryMobile Scripts -->
-		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-        <script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
-
-
-  <script src="js/nativedroid.script.js"></script>
-  <script  charset="utf-8" src="js/cordova-2.0.0.js"></script>
- 
+    <meta id="extViewportMeta" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+    <link rel="stylesheet" href="css/jquerymobile.css" />
+    <link rel="stylesheet" href="css/jquerymobile.nativedroid.css" />
+    <link rel="stylesheet" href="css/jquerymobile.nativedroid.light.css"  id='jQMnDTheme' />
+    <link rel="stylesheet" href="css/jquerymobile.nativedroid.color.green.css" id='jQMnDColor' />
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
+    <script src="js/nativedroid.script.js"></script>
+     <script src="js/authorize_page.js"></script>
+    <script  charset="utf-8" src="js/cordova-2.0.0.js"></script>
 
     <script type="text/javascript" charset="utf-8">
         if (!jQuery) {
@@ -79,111 +67,144 @@
           });
           
       });
+      function user_logout() {
+        window.localStorage.removeItem('login_token');
+        window.location ='index.html'
+      }
     </script>
     <style>
         #heading
         {
           background-color: #0071BC;
           color: white;
+          margin-top: -10px;
         }
         #heading_menu{
           background-color: #B6DB49;  
         }
       </style>
   <body>
-  
-<div data-role="page" id="demo-page" data-url="demo-page" data-theme="b">
-    <div data-role="header" id="heading" class="topheader" data-theme="b">
-        <a href="#left-panel"><i class='icon-reorder'></i></a>
-        <h1>New Site</h1>
-    </div><!-- /header -->
-    <div role="main" class="ui-content">
-         
-
         <form id="new_site">
-              <div style="margin:0;padding:0;display:inline">
-                  <input name="utf8" type="hidden" value="✓">
-                  <input name="authenticity_token" type="hidden" value="D3YhO/DKZ78MMTi00fWUjvOOnGOCPTrbJu/U7uKilwU=">
-              </div>
+          <div style="margin:0;padding:0;display:inline">
+            <input name="utf8" type="hidden" value="✓">
+            <input name="authenticity_token" type="hidden" value="D3YhO/DKZ78MMTi00fWUjvOOnGOCPTrbJu/U7uKilwU=">
+          </div>
+          <div data-role="page" id="demo-page1" data-url="demo-page1" data-theme="b">
+            <div data-role="header" id="heading" class="topheader" data-theme="b">
+              <a href="#left-panel"><i class='icon-reorder'></i></a>
+              <h1>New Site</h1>
+            </div><!-- /header -->
+            <div role="main" class="ui-content">
+             <ul data-role="listview" data-inset="true">
+              <fieldset>
+                <li data-role="fieldcontain">
+                  <label for="site_site_name">Site name</label>
+                  <input class="form-control" id="site_site_name" name="site[site_name]" value="" data-clear-btn="true"  type="text">
+                </li>
+                <li data-role="fieldcontain">
+                  <label for="site_contact_name">Contact name</label>
+                  <input class="form-control" id="site_contact_name" name="site[contact_name]" size="30" type="text">
+                </li>
+                <li data-role="fieldcontain">
+                  <label for="site_phone">Phone</label>
+                  <input class="form-control" id="site_phone" name="site[phone]" size="30" type="text">
+                </li>
+               </fieldset>
+              </ul>
+              <a href="#demo-page2" style="float:right"><i class='icon-circle-arrow-right'>NEXT</i></a>
+            </div>
+            <div data-role="panel" id="left-panel" data-theme="a">
+              <ul data-role='listview'>
+                <li data-role="list-divider" id="heading_menu">Menu</li>
+                <li><a href="home.html" data-ajax='false' rel="external"><i class='icon-dashboard'></i> Dashboard</a></li>
+                <li><a href="order_form.html" data-ajax='false' rel="external"><i class='icon-edit'></i> New Order</a></li>
+                <li><a href="site_form.html" data-ajax='false' rel="external"><i class='icon-edit-sign'></i> New Site</a></li>
+                <li><a href="#" data-ajoutax='false' onclick="user_logout();" rel="external"><i class='icon-signout'></i> Logout</a></li>
+              </ul>
+             </div>
+          </div>
+          <div data-role="page" id="demo-page2" data-url="demo-page2" data-theme="b">
+            <div data-role="header" id="heading" class="topheader" data-theme="b">
+              <a href="#left-panel"><i class='icon-reorder'></i></a>
+              <h1>New Site</h1>
+            </div><!-- /header -->
+            <div role="main" class="ui-content">
               <ul data-role="listview" data-inset="true">
-              <fieldset>
-               
-                   <li data-role="fieldcontain">
-                       <label for="site_site_name">Site name</label>
-                          <input class="form-control" id="site_site_name" name="site[site_name]" value="" data-clear-btn="true"  type="text">
-                    </li>
-                    <li data-role="fieldcontain">
-                        <label for="site_contact_name">Contact name</label>
-                          <input class="form-control" id="site_contact_name" name="site[contact_name]" size="30" type="text">
-                    </li>
-                    <li data-role="fieldcontain">
-                        <label for="site_phone">Phone</label>
-                          <input class="form-control" id="site_phone" name="site[phone]" size="30" type="text">
-                    </li>
-                   
-              </fieldset>
-              <fieldset>
+                <fieldset>
                   <div class="row">
-                      <table class="table">
-                          <tbody id="bins">
-
-                          <tr class="fields">
-                            <td>
-                              <li>
+                    <table class="table">
+                      <tbody id="bins">
+                        <tr class="fields">
+                          <td>
+                            <li>
                               <label for="site_bins_attributes_0_bin_number">Bin number</label>
                               <input class="form-control" id="site_bins_attributes_0_bin_number" name="site[bins_attributes][0][bin_number]" size="30" type="text">
-                              </li>
-                            </td>
-                            <td>
+                            </li>
+                          </td>
+                          <td>
                             <li>
                               <input id="site_bins_attributes_0__destroy" name="site[bins_attributes][0][_destroy]" type="hidden" value="false"><a href="#" class="ui-btn   ui-corner-all" onclick="remove_fields(this); return false;">Delete</a>      
-                              </td>
-                              </li>
-                          </tr>
-
-                          </tbody>
-                      </table>
+                            </li>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
                       <a  class="ui-btn ui-btn-inline" data-mini='true' data-role="button" href="#" onclick="add_table_fields(this, 'bins', '&lt;tr class=\&quot;fields\&quot;&gt;\n  &lt;td&gt;\n    &lt;div class=\&quot;row\&quot;&gt;\n        &lt;div class=\&quot;col-sm-6 pull-left\&quot;&gt;\n      &lt;label for=\&quot;site_bins_attributes_new_bins_bin_number\&quot;&gt;Bin number&lt;\/label&gt;\n     &lt;input class=\&quot;form-control\&quot; id=\&quot;site_bins_attributes_new_bins_bin_number\&quot; name=\&quot;site[bins_attributes][new_bins][bin_number]\&quot; size=\&quot;30\&quot; type=\&quot;text\&quot; /&gt;\n   &lt;\/div&gt;\n        &lt;div class=\&quot;col-sm-6 pull-left\&quot;&gt;\n        &lt;input id=\&quot;site_bins_attributes_new_bins__destroy\&quot; name=\&quot;site[bins_attributes][new_bins][_destroy]\&quot; type=\&quot;hidden\&quot; value=\&quot;false\&quot; /&gt;&lt;a class=\&quot;btn btn-danger btn-xs\&quot; href=\&quot;#\&quot; onclick=\&quot;remove_fields(this); return false;\&quot;&gt;Delete&lt;\/a&gt;\n   &lt;\/div&gt;\n   &lt;\/div&gt;\n\n  &lt;\/td&gt;\n&lt;\/tr&gt;\n'); return false;"> Add bin</a>
-
-              </fieldset>
-              <fieldset>
-
-                    <li data-role="fieldcontain">
-                        <label for="site_email1">Email1</label>
-                          <input class="form-control" id="site_email1" name="site[email1]" size="30" type="text">
-                    </li>
-                    <li data-role="fieldcontain">
-                        <label for="site_email2">Email2</label>
-                          <input class="form-control" id="site_email2" name="site[email2]" size="30" type="text">
-                    </li>
-                    <li data-role="fieldcontain">
-                        <label for="site_email3">Email3</label>
-                          <input class="form-control" id="site_email3" name="site[email3]" size="30" type="text">
-                    </li>
-              </fieldset>
-               <button type="Submit" class="btn btn-labeled btn-primary">
-                  Submit
-              </button>
+                  </div>
+                </fieldset>
+                <br/>
+                <a href="#demo-page1" style="float:left"><i class='icon-circle-arrow-left'></i>PREVIOUS</a>
+                <a href="#demo-page3" style="float:right"><i class='icon-circle-arrow-right'></i>NEXT</a>
               </ul>
-          </form>
-
-
-
-
-      </div><!-- /content -->
-      <div data-role="panel" id="left-panel" data-theme="a">
-          
-          <!-- <a href="#" data-rel="close" class="ui-btn ui-corner-all ui-shadow ui-mini ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-right">Close</a> -->
-          <ul data-role='listview'>
-
-             <li data-role="list-divider" id="heading_menu">Menu</li>
-              <li><a href="home.html" data-ajax='false' rel="external"><i class='icon-dashboard'></i> Dashboard</a></li>
-              <li><a href="order_form.html" data-ajax='false' rel="external"><i class='icon-edit'></i> New Order</a></li>
-              <li><a href="site_form.html" data-ajax='false' rel="external"><i class='icon-edit-sign'></i> New Site</a></li>
-              <li><a href="index.html" data-ajax='false' rel="external"><i class='icon-signout'></i> Logout</a></li>
-          </ul>
-      </div> 
-  </div> 
+            </div>
+            <div data-role="panel" id="left-panel" data-theme="a">
+              <ul data-role='listview'>
+                <li data-role="list-divider" id="heading_menu">Menu</li>
+                <li><a href="home.html" data-ajax='false' rel="external"><i class='icon-dashboard'></i> Dashboard</a></li>
+                <li><a href="order_form.html" data-ajax='false' rel="external"><i class='icon-edit'></i> New Order</a></li>
+                <li><a href="site_form.html" data-ajax='false' rel="external"><i class='icon-edit-sign'></i> New Site</a></li>
+                <li><a href="#" data-ajoutax='false' onclick="user_logout();" rel="external"><i class='icon-signout'></i> Logout</a></li>
+              </ul>
+             </div>
+          </div>
+          <div data-role="page" id="demo-page3" data-url="demo-page3" data-theme="b"> 
+            <div data-role="header" id="heading" class="topheader" data-theme="b">
+              <a href="#left-panel"><i class='icon-reorder'></i></a>
+              <h1>New Site</h1>
+            </div><!-- /header --> 
+            <div role="main" class="ui-content">
+              <ul data-role="listview" data-inset="true">
+                <fieldset>
+                  <li data-role="fieldcontain">
+                    <label for="site_email1">Email1</label>
+                    <input class="form-control" id="site_email1" name="site[email1]" size="30" type="text">
+                  </li>
+                  <li data-role="fieldcontain">
+                    <label for="site_email2">Email2</label>
+                    <input class="form-control" id="site_email2" name="site[email2]" size="30" type="text">
+                  </li>
+                  <li data-role="fieldcontain">
+                    <label for="site_email3">Email3</label>
+                    <input class="form-control" id="site_email3" name="site[email3]" size="30" type="text">
+                  </li>
+                </fieldset>
+                <button type="Submit" class="btn btn-labeled btn-primary">
+                  Submit
+                </button>
+              </ul>
+              <a href="#demo-page2" style="float:left"><i class='icon-circle-arrow-left'>PREVIOUS</i></a>
+            </div>
+            <div data-role="panel" id="left-panel" data-theme="a">
+              <ul data-role='listview'>
+                <li data-role="list-divider" id="heading_menu">Menu</li>
+                <li><a href="home.html" data-ajax='false' rel="external"><i class='icon-dashboard'></i> Dashboard</a></li>
+                <li><a href="order_form.html" data-ajax='false' rel="external"><i class='icon-edit'></i> New Order</a></li>
+                <li><a href="site_form.html" data-ajax='false' rel="external"><i class='icon-edit-sign'></i> New Site</a></li>
+                <li><a href="#" data-ajoutax='false' onclick="user_logout();" rel="external"><i class='icon-signout'></i> Logout</a></li>
+              </ul>
+            </div>
+          </div>
+        </form>   
   </body>
 </html>
 

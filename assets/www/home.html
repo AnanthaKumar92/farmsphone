@@ -1,43 +1,38 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta id="extViewportMeta" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
-
-
-<link rel="stylesheet" href="css/font-awesome.min.css" />
-
-    <!-- jQueryMobileCSS - original without styling -->
-        <link rel="stylesheet" href="css/jquerymobile.css" />
-
-    <!-- nativeDroid core CSS -->
-        <link rel="stylesheet" href="css/jquerymobile.nativedroid.css" />
-
-    <!-- nativeDroid: Light/Dark -->
-        <link rel="stylesheet" href="css/jquerymobile.nativedroid.light.css"  id='jQMnDTheme' />
-
-    <!-- nativeDroid: Color Schemes -->
-        <link rel="stylesheet" href="css/jquerymobile.nativedroid.color.green.css" id='jQMnDColor' />
-
-    <!-- jQuery / jQueryMobile Scripts -->
+  <head>
+    <meta id="extViewportMeta" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+    <link rel="stylesheet" href="css/jquerymobile.css" />
+    <link rel="stylesheet" href="css/jquerymobile.nativedroid.css" />
+    <link rel="stylesheet" href="css/jquerymobile.nativedroid.light.css"  id='jQMnDTheme' />
+    <link rel="stylesheet" href="css/jquerymobile.nativedroid.color.green.css" id='jQMnDColor' />
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-        <script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
+    <script src="js/nativedroid.script.js"></script>
+    <script src="js/authorize_page.js"></script>
+    <script  charset="utf-8" src="js/cordova-2.0.0.js"></script>
+    <script type="text/javascript">
+  
+      function user_logout() {
+        window.localStorage.removeItem('login_token');
+        window.location ='index.html'
+      }
 
-
-  <script src="js/nativedroid.script.js"></script>
-  <script  charset="utf-8" src="js/cordova-2.0.0.js"></script>
- <style>
-  #heading
-  {
-    background-color: #0071BC;
-    color: white;
-  }
-  #heading_menu{
-    background-color: #B6DB49;  
-  }
- </style>
-
-</head>
+    </script>
+    <style>
+      #heading
+      {
+        background-color: #0071BC;
+        color: white;
+        margin-top: -10px;
+      }
+      #heading_menu{
+        background-color: #B6DB49;  
+      }
+    </style>
+  </head>
 <body>
 <div data-role="page" id="demo-page" data-url="demo-page" data-theme="b">
     <div data-role="header" id="heading"  data-theme="b">
@@ -80,7 +75,7 @@
         <li><a href="home.html" data-ajax='false'  rel="external"><i class='icon-dashboard'></i> Dashboard</a></li>
         <li><a href="order_form.html" data-ajax='false' rel="external"><i class='icon-edit'></i> New Order</a></li>
         <li><a href="site_form.html" data-ajax='false' rel="external"><i class='icon-edit-sign'></i> New Site</a></li>
-        <li><a href="index.html" data-ajax='false' rel="external"><i class='icon-signout'></i> Logout</a></li>
+        <li><a href="#" data-ajoutax='false' onclick="user_logout();" rel="external"><i class='icon-signout'></i> Logout</a></li>
       </ul>
     </div> 
 </div> 
