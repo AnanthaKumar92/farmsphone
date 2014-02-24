@@ -17,7 +17,7 @@
 
     <script type="text/javascript" charset="utf-8">
       $(function() {
-           $('#new_report').submit(function(e) {
+           $('#new_shipment').submit(function(e) {
               $.ajax({
               type: "GET",
               url: 'http://farms.herokuapp.com/api/orders/shipments',
@@ -25,7 +25,7 @@
               dataType: "jsonp",
               cache: false,
                success: function(data) {
-                 alert('shipment Created successfully')
+                 alert('Shipment Created successfully')
                 $('#new_shipment')[0].reset();
                 return false
               },
