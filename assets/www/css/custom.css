@@ -12,3 +12,30 @@
 	border-radius: 10px; /* future proofing */
 	-khtml-border-radius: 10px;
 }
+#heading{
+    background-color: #0071BC;
+    color: white;
+    margin-top: -10px;
+}
+#heading_menu{
+  background-color: #B6DB49;  
+}
+.next{
+  float:right; 
+  background-color:#B6DB49;
+}
+.back{
+  float:left; 
+  background-color:#B6DB49;
+}
+.ui-btn-left{
+	background-color: #0071BC;
+}
+/*.form-control{
+	background-color:#B6DB49;
+}*/
+/*.ui-btn-up-b{
+	border:1px solid #00415e;
+	background:#B6DB49;
+	color:#fff;
+}*/

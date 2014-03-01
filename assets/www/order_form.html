@@ -16,133 +16,10 @@
     <script src="js/main.js"></script>
      <script src="js/authorize_page.js"></script>
     <script  charset="utf-8" src="js/cordova-2.0.0.js"></script>
-    <script type="text/javascript" charset="utf-8">
-      $(function() {
-        $.ajax({
-          type: "GET",
-          url: 'http://farms.herokuapp.com/api/orders/get_bins',
-          data: $(this).serialize(),
-          dataType: "jsonp",
-          cache: false,
-           success: function(data) {
-              console.log(data)
-              $.each(data, function(a, val) {
-                  $('select.bins').append($('<option value='+val[1]+'>'+val[0]+'</option>'));
-              });
-              $('select.bins').listview();               
-            },
-
-            error: function(data,status){
-              alert('Bin is empty')
-            },
-
-            complete: function(data){
-              // alert('completed')
-            },
-
-            denied: function(data){
-              alert('Access denied')
-            }
-          });
-            
-          $.ajax({
-          type: "GET",
-          url: 'http://farms.herokuapp.com/api/orders/get_sites',
-          data: $(this).serialize(),
-          dataType: "jsonp",
-          cache: false,
-           success: function(data) {      
-            
-              $.each(data, function(a, val) {
-              
-                 $('#order_site_id').append($('<option value='+val[1]+'>'+val[0]+'</option>'))
-                 });
-            $('#order_site_id').listview(); 
-             
-          },
-
-          error: function(data,status){
-            alert('Bin is empty')
-           },
-
-          complete: function(data){
-            // alert('completed')
-          },
-
-          denied: function(data){
-            alert('Access denied')
-          }
-         });
-         
-           remove_fields = function(link) {
-           $(link).prev("input[type=hidden]").val("1");
-           return $(link).closest(".fields").hide();
-           };
-         
-           window.remove_fields = remove_fields;
-         
-           add_table_fields = function(link, association) {
-           var content = $('tr.fields:eq(0)').clone().html();
-           var new_id, regexp;
-           new_id = new Date().getTime();
-           regexp = new RegExp("new_" + association, "g");
-           return $("#" + association).append("<tr class='fields'>"+content.replace(regexp, new_id)+"</tr>");
-           };
-           function Add () {
-             alert("Order submitted successfully")
-           }
-         
-           $('#new_order').submit(function(e) {
-              $.ajax({
-              type: "GET",
-              url: 'http://farms.herokuapp.com/api/orders/new_order',
-              data: $(this).serialize(),
-              dataType: "jsonp",
-              cache: false,
-               success: function(data) {
-                 alert('Order Created successfully')
-                $('#new_order')[0].reset();
-                return false
-              },
-
-              error: function(data,status){
-                alert('Please try again.')
-              },
-
-              complete: function(data){
-                // alert('completed')
-              },
-
-              denied: function(data){
-                alert('Access denied')
-              }
-            });
-            return false
-            e.preventDefault()   
-           });
-
-
-         });
-          function user_logout() {
-            window.localStorage.removeItem('login_token');
-            window.location ='index.html'
-          }
-      </script>
-      <style>
-        #heading
-        {
-          background-color: #0071BC;
-          color: white;
-          margin-top: -10px;
-        }
-        #heading_menu{
-          background-color: #B6DB49;  
-        }
-      </style>
       <body>
-        <div id="loading-image">
+        <!--<div id="loading-image">
           <img src="images/loading-old.gif" alt="Loading..." />
-        </div>
+        </div>-->
 
         <form accept-charset="UTF-8" id="new_order">
            <div style="margin:0;padding:0;display:inline">
@@ -168,24 +45,28 @@
                 </select>
                </fieldset>
               </ul>
-              <a href="#demo-page2" data-transition="slide"  style="float:right"><i class='icon-circle-arrow-right'>NEXT</i></a>
+              <ul data-role="listview" data-divider-theme="b" data-icon="false" data-filter="false" data-filter-theme="b" class='showastabs'>
+                <li class="next"><a href="#demo-page2" data-transition="slide" ><i class='icon-circle-arrow-right'>NEXT</i></a></li>
+              </ul>
+              
             </div>
-            <div data-role="panel" id="left-panel" data-theme="a">
+            <div data-role="panel" data-transition="slide"  id="left-panel" data-theme="a">
               <ul data-role='listview'>
                 <li data-role="list-divider" id="heading_menu">Menu</li>
-                <li><a href="home.html" data-ajax='false' rel="external"><i class='icon-dashboard'></i> Dashboard</a></li>
-                <li><a href="inventory.html" data-ajax='false' rel="external"><i class='icon-dashboard'></i> Inventory</a></li>
-                <li><a href="shipments.html" data-ajax='false' rel="external"><i class='icon-dashboard'></i> Shipment</a></li>
-                <li><a href="order_form.html" data-ajax='false' rel="external"><i class='icon-edit'></i> New Order</a></li>
-                <li><a href="site_form.html" data-ajax='false' rel="external"><i class='icon-edit-sign'></i> New Site</a></li>
-                <li><a href="#" data-ajoutax='false' onclick="user_logout();" rel="external"><i class='icon-signout'></i> Logout</a></li>
+                <li><a href="home.html" data-transition="slide"  data-ajax='false' rel="external"><i class='icon-dashboard'></i> Dashboard</a></li>
+                <li><a href="inventory.html" data-transition="slide"  data-ajax='false' rel="external"><i class='icon-dashboard'></i> Inventory</a></li>
+                <li><a href="shipments.html" data-transition="slide"  data-ajax='false' rel="external"><i class='icon-dashboard'></i> Shipment</a></li>
+                <li><a href="order_form.html" data-transition="slide"  data-ajax='false' rel="external"><i class='icon-edit'></i> New Order</a></li>
+                <li><a href="site_form.html" data-transition="slide"  data-ajax='false' rel="external"><i class='icon-edit-sign'></i> New Site</a></li>
+                <li><a href="pictures.html" data-transition="slide"  data-ajax='false' rel="external"><i class='icon-edit-sign'></i> Pictures</a></li>
+                <li><a href="#" data-ajoutax='false' data-transition="slide"  onclick="user_logout();" rel="external"><i class='icon-signout'></i> Logout</a></li>
               </ul>
              </div>
           </div>
           <div data-role="page" id="demo-page2" data-url="demo-page2" data-theme="b">
             <div data-role="header" id="heading" class="topheader" data-theme="b">
               <a href="#left-panel"><i class='icon-reorder'></i></a>
-              <h1>New Site</h1>
+              <h1>New Order</h1>
             </div><!-- /header -->
             <div role="main" class="ui-content">
               <ul data-role="listview" data-inset="true">
@@ -214,26 +95,31 @@
                   </div>
                 </fieldset>
                 <br/>
-                <a href="#demo-page1" data-transition="slide"  style="float:left"><i class='icon-circle-arrow-left'></i>PREVIOUS</a>
-                <a href="#demo-page3" data-transition="slide"  style="float:right"><i class='icon-circle-arrow-right'></i>NEXT</a>
+                <ul data-role="listview" data-divider-theme="b" data-icon="false" data-filter="false" data-filter-theme="b" class='showastabs'>
+                <li class="back"><a href="#demo-page1" data-transition="slide"  style="float:left"><i class='icon-circle-arrow-left'></i>PREVIOUS</a></li>
+                <li class="next"><a href="#demo-page3" data-transition="slide"><i class='icon-circle-arrow-right'></i>NEXT</a></li>
+                </ul>
+                
+                
               </ul>
             </div>
-            <div data-role="panel" id="left-panel" data-theme="a">
+            <div data-role="panel" data-transition="slide"  id="left-panel" data-theme="a">
               <ul data-role='listview'>
                 <li data-role="list-divider" id="heading_menu">Menu</li>
-                <li><a href="home.html" data-ajax='false' rel="external"><i class='icon-dashboard'></i> Dashboard</a></li>
-                <li><a href="inventory.html" data-ajax='false' rel="external"><i class='icon-dashboard'></i> Inventory</a></li>
-                <li><a href="shipments.html" data-ajax='false' rel="external"><i class='icon-dashboard'></i> Shipment</a></li>
-                <li><a href="order_form.html" data-ajax='false' rel="external"><i class='icon-edit'></i> New Order</a></li>
-                <li><a href="site_form.html" data-ajax='false' rel="external"><i class='icon-edit-sign'></i> New Site</a></li>
-                <li><a href="#" data-ajoutax='false' onclick="user_logout();" rel="external"><i class='icon-signout'></i> Logout</a></li>
+                <li><a href="home.html" data-transition="slide"  data-ajax='false' rel="external"><i class='icon-dashboard'></i> Dashboard</a></li>
+                <li><a href="inventory.html" data-transition="slide"  data-ajax='false' rel="external"><i class='icon-dashboard'></i> Inventory</a></li>
+                <li><a href="shipments.html" data-transition="slide"  data-ajax='false' rel="external"><i class='icon-dashboard'></i> Shipment</a></li>
+                <li><a href="order_form.html" data-transition="slide"  data-ajax='false' rel="external"><i class='icon-edit'></i> New Order</a></li>
+                <li><a href="site_form.html" data-transition="slide"  data-ajax='false' rel="external"><i class='icon-edit-sign'></i> New Site</a></li>
+                <li><a href="pictures.html" data-transition="slide"  data-ajax='false' rel="external"><i class='icon-edit-sign'></i> Pictures</a></li>
+                <li><a href="#" data-ajoutax='false' data-transition="slide"  onclick="user_logout();" rel="external"><i class='icon-signout'></i> Logout</a></li>
               </ul>
              </div>
           </div>
           <div data-role="page" id="demo-page3" data-url="demo-page3" data-theme="b"> 
             <div data-role="header" id="heading" class="topheader" data-theme="b">
               <a href="#left-panel"><i class='icon-reorder'></i></a>
-              <h1>New Site</h1>
+              <h1>New Order</h1>
             </div><!-- /header --> 
             <div role="main" class="ui-content">
               <ul data-role="listview" data-inset="true">
@@ -251,19 +137,23 @@
                     Submit  
                   </button>
               </ul>
-              <a href="#demo-page2" data-transition="slide"  style="float:left"><i class='icon-circle-arrow-left'>PREVIOUS</i></a>
-            </div>
-            <div data-role="panel" id="left-panel" data-theme="a">
-              <ul data-role='listview'>
-                <li data-role="list-divider" id="heading_menu"><h1>Menu</h1></li>
-                <li><a href="home.html" data-ajax='false' rel="external"><i class='icon-dashboard'></i> Dashboard</a></li>
-                <li><a href="inventory.html" data-ajax='false' rel="external"><i class='icon-dashboard'></i> Inventory</a></li>
-                <li><a href="shipments.html" data-ajax='false' rel="external"><i class='icon-dashboard'></i> Shipment</a></li>
-                <li><a href="order_form.html" data-ajax='false' rel="external"><i class='icon-edit'></i> New Order</a></li>
-                <li><a href="site_form.html" data-ajax='false' rel="external"><i class='icon-edit-sign'></i> New Site</a></li>
-                <li><a href="#" data-ajoutax='false' onclick="user_logout();" rel="external"><i class='icon-signout'></i> Logout</a></li>
+              <ul data-role="listview" data-divider-theme="b" data-icon="false" data-filter="false" data-filter-theme="b" class='showastabs'>
+                <li class="back"><a href="#demo-page2" data-transition="slide"><i class='icon-circle-arrow-left'>PREVIOUS</i></a></li>
               </ul>
+              
             </div>
+            <div data-role="panel" data-transition="slide"  id="left-panel" data-theme="a">
+              <ul data-role='listview'>
+                <li data-role="list-divider" id="heading_menu">Menu</li>
+                <li><a href="home.html" data-transition="slide"  data-ajax='false' rel="external"><i class='icon-dashboard'></i> Dashboard</a></li>
+                <li><a href="inventory.html" data-transition="slide"  data-ajax='false' rel="external"><i class='icon-dashboard'></i> Inventory</a></li>
+                <li><a href="shipments.html" data-transition="slide"  data-ajax='false' rel="external"><i class='icon-dashboard'></i> Shipment</a></li>
+                <li><a href="order_form.html" data-transition="slide"  data-ajax='false' rel="external"><i class='icon-edit'></i> New Order</a></li>
+                <li><a href="site_form.html" data-transition="slide"  data-ajax='false' rel="external"><i class='icon-edit-sign'></i> New Site</a></li>
+                <li><a href="pictures.html" data-transition="slide"  data-ajax='false' rel="external"><i class='icon-edit-sign'></i> Pictures</a></li>
+                <li><a href="#" data-ajoutax='false' data-transition="slide"  onclick="user_logout();" rel="external"><i class='icon-signout'></i> Logout</a></li>
+              </ul>
+             </div>
           </div>
         </form>   
       </body>  

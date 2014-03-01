@@ -15,61 +15,10 @@
     <script src="js/authorize_page.js"></script>
     <script src="js/main.js"></script>
     <script  charset="utf-8" src="js/cordova-2.0.0.js"></script>
-
-    <script type="text/javascript" charset="utf-8">
-      $(function() {
-           $('#new_shipment').submit(function(e) {
-              $.ajax({
-              type: "GET",
-              url: 'http://farms.herokuapp.com/api/orders/shipments',
-              data: $(this).serialize(),
-              dataType: "jsonp",
-              cache: false,
-               success: function(data) {
-                 alert('Shipment Created successfully')
-                $('#new_shipment')[0].reset();
-                return false
-              },
-
-              error: function(data,status){
-                alert('Please try again.')
-              },
-
-              complete: function(data){
-                // alert('completed')
-              },
-
-              denied: function(data){
-                alert('Access denied')
-              }
-            });
-            return false
-            e.preventDefault()   
-           });
-
-
-         });
-      function user_logout() {
-        window.localStorage.removeItem('login_token');
-        window.location ='index.html'
-      }
-     
-    </script>
-    <style>
-        #heading
-        {
-          background-color: #0071BC;
-          color: white;
-          margin-top: -10px;
-        }
-        #heading_menu{
-          background-color: #B6DB49;  
-        }
-      </style>
   <body>
-  <div id="loading-image">
+  <!--<div id="loading-image">
           <img src="images/loading-old.gif" alt="Loading..." />
-        </div>
+        </div>-->
         <form accept-charset="UTF-8" id="new_shipment">
           <div style="margin:0;padding:0;display:inline">
             <input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="DpG8kM+ZXG0GR71SKfbZfzeoCqWfipeiYBDNZ9kPLBk=" /></div>
@@ -103,15 +52,16 @@
                 </button>
               </ul>
             </div>
-            <div data-role="panel" id="left-panel" data-theme="a">
+            <div data-role="panel" data-transition="slide"  id="left-panel" data-theme="a">
               <ul data-role='listview'>
                 <li data-role="list-divider" id="heading_menu">Menu</li>
-                <li><a href="home.html" data-ajax='false' rel="external"><i class='icon-dashboard'></i> Dashboard</a></li>
-                <li><a href="inventory.html" data-ajax='false' rel="external"><i class='icon-dashboard'></i> Inventory</a></li>
-                <li><a href="shipments.html" data-ajax='false' rel="external"><i class='icon-dashboard'></i> Shipment</a></li>
-                <li><a href="order_form.html" data-ajax='false' rel="external"><i class='icon-edit'></i> New Order</a></li>
-                <li><a href="site_form.html" data-ajax='false' rel="external"><i class='icon-edit-sign'></i> New Site</a></li>
-                <li><a href="#" data-ajoutax='false' onclick="user_logout();" rel="external"><i class='icon-signout'></i> Logout</a></li>
+                <li><a href="home.html" data-transition="slide"  data-ajax='false' rel="external"><i class='icon-dashboard'></i> Dashboard</a></li>
+                <li><a href="inventory.html" data-transition="slide"  data-ajax='false' rel="external"><i class='icon-dashboard'></i> Inventory</a></li>
+                <li><a href="shipments.html" data-transition="slide"  data-ajax='false' rel="external"><i class='icon-dashboard'></i> Shipment</a></li>
+                <li><a href="order_form.html" data-transition="slide"  data-ajax='false' rel="external"><i class='icon-edit'></i> New Order</a></li>
+                <li><a href="site_form.html" data-transition="slide"  data-ajax='false' rel="external"><i class='icon-edit-sign'></i> New Site</a></li>
+                <li><a href="pictures.html" data-transition="slide"  data-ajax='false' rel="external"><i class='icon-edit-sign'></i> Pictures</a></li>
+                <li><a href="#" data-ajoutax='false' data-transition="slide"  onclick="user_logout();" rel="external"><i class='icon-signout'></i> Logout</a></li>
               </ul>
              </div>
           </div>

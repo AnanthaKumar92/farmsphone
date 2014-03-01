@@ -1,14 +1,8 @@
 function onLoad() {
 	 document.addEventListener("deviceready", onDeviceReady, false);
 }
-  
-jQuery(window).load(function() {
-    jQuery('#loading-image').hide();
-});
-
 
 function onDeviceReady() {
-     navigator.splashscreen.hide();
 
   //    $('.locations ul li').remove();
 	 // $.getJSON('http://192.168.2.6:3001/locations.json', function(data) {    
@@ -24,11 +18,10 @@ function onDeviceReady() {
 }	
 
 
-function createLocation() {
-    alert('Created SuccessFully')    
-    $.mobile.changePage('#home');
-    return false
-}
+// jQuery(window).load(function() {
+//     jQuery('#loading-image').hide();
+// });
+
 function refreshLocation() {
     onDeviceReady();
 }
@@ -38,28 +31,41 @@ function refreshLocation() {
 function capturePhoto(){
     navigator.camera.getPicture(uploadPhoto,null,{sourceType:1,quality:60});
 }
-function uploadPhoto(data){
-// this is where you would send the image file to server
-    cameraPic.src =  data;
-    // Successful upload to the server
-    navigator.notification.alert(
-        'Your Photo has been uploaded',  // message
-        okay,                           // callback
-        'Photo Uploaded',              // title
-        'OK'                          // buttonName
-    );
-    // upload has failed Fail
-    /*
-    if (failedToUpload){
-    navigator.notification.alert(
-        'Your Photo has failed to upload',
-        failedDismissed,
-        'Photo Not Uploaded',
-        'OK'
-        );
-    }
-    */
+
+ function uploadPhoto(imageURI) {
+    var options = new FileUploadOptions();
+    options.fileKey="file";
+    options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1);
+    options.mimeType="image/jpeg";
+    var params = new Object();
+    params.user_key = window.localStorage.getItem('login_token');
+    options.params = params;
+    // cameraPic.src =  imageURI; 
+    // $('ul#image-list').append('Sucesss')
+     collect_images(imageURI, options)
+  }
+  function collect_images(image, options) {
+    $('ul#image-list').append('<li><br><img width=100px src='+image+'></img><input data-image='+image+' data-option='+options+' type=checkbox class=upload /></li>');
+  }
+
+function uploadAll() {
+      $('.upload:checked').each(function() {
+          jQuery('#loading-image').show();
+
+          imageURI = $(this).data('image');
+          options =  $(this).data('options');
+            $(this).attr('checked', false);
+            var ft = new FileTransfer();            
+            ft.upload(imageURI, "http://farms.herokuapp.com/api/orders/upload_picture", win, fail, options);
+      });
 }
-function okay(){
-    // Do something
-}
+
+ function win(r) {
+      jQuery('#loading-image').hide();
+      alert('Image Uploaded SuccessFully');
+      console.log("Image uploaded = " + r.responseCode);
+  }
+
+  function fail(error) {
+      alert("An error has occurred. Please try again: Code = " = error.code);
+  }

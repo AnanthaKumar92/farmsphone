@@ -12,7 +12,7 @@
 	border-bottom: 2px solid #B6DB49;
 }
 
-.ui-btn-down-b .ui-btn-inner,.ui-btn-down-b .ui-btn-text .ui-link-inherit,.ui-listview .ui-btn-hover-b,.ui-input-search.ui-body-b {
+.ui-btn-down-b .ui-btn-inner,.ui-btn-down-b .ui-btn-text .ui-link-inherit,.ui-input-search.ui-body-b {
 	background-color: #B6DB49;
 }
 
@@ -20,8 +20,16 @@
 	background-color: #99cc00;
 }
 
-.ui-body-b div.ui-input-text.ui-focus:after{background-color: #99cc00;}
-.ui-body-b div.ui-input-text.ui-focus:before{background-color: #99cc00;}
+.ui-btn-corner-all{
+	background-color: #B6DB49;
+}
+
+
+
+
+
+.ui-body-b div.ui-input-text.ui-focus:after{}
+.ui-body-b div.ui-input-text.ui-focus:before{}
 .ui-body-b div.ui-input-text.ui-focus {border-bottom: 1px solid #99cc00;}
 
 textarea.ui-body-b.ui-input-text:focus {
