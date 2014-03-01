@@ -8,6 +8,7 @@ $(function() {
   }
 
   $('#new_user_session').submit(function(e) {
+     jQuery('#loading-image').show()
     $.ajax({
       type: "GET",
       url: 'http://farms.herokuapp.com/api/sites/user_login',
@@ -15,13 +16,15 @@ $(function() {
       dataType: "jsonp",
       cache: false,
       success: function(data) {
+        jQuery('#loading-image').hide();
         if (data.error=="invalid_grant"){
           alert('Invalid username/password')
           return false
         }else{
           user_login(data);  
           return false
-        }              
+        }   
+
       },
       error: function(data,status){
         alert('Invalid username/password')

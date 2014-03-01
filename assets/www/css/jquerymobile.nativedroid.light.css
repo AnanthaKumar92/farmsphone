@@ -101,10 +101,10 @@ progress::-webkit-progress-bar {
 	position: relative;
 }
 .ui-body-b div.ui-input-text {
-	border-bottom: 1px solid rgba(0,0,0,0.3);
+	/*border-bottom: 1px solid rgba(0,0,0,0.3);*/
 }
 .ui-body-b div.ui-input-text:after{content:""; background-color: rgba(0,0,0,0.3); position: absolute; bottom: -1px; left: -1px; height: 10px; width: 1px;}
-.ui-body-b div.ui-input-text:before{content:""; background-color: rgba(0,0,0,0.3); position: absolute; bottom: -1px; right: -1px; height: 10px; width: 1px;}
+.ui-body-b div.ui-input-text:before{content:""; /*background-color: rgba(0,0,0,0.3);*/ position: absolute; bottom: -1px; right: -1px; height: 10px; width: 1px;}
 
 .ui-body-b div.ui-input-text.ui-focus:after{content:""; position: absolute; bottom: -1px; left: -1px; height: 10px; width: 1px;}
 .ui-body-b div.ui-input-text.ui-focus:before{content:""; position: absolute; bottom: -1px; right: -1px; height: 10px; width: 1px;}

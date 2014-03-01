@@ -2,18 +2,25 @@ function onLoad() {
 	 document.addEventListener("deviceready", onDeviceReady, false);
 }
   
-function onDeviceReady() {
-     $('.locations ul li').remove();
-	 $.getJSON('http://192.168.2.6:3001/locations.json', function(data) {    
+jQuery(window).load(function() {
+    jQuery('#loading-image').hide();
+});
 
-             $.each(data, function(index, location) {                   
-                $('.locations ul').append('<li>' +
-                '<h4>' + location.name + '</h4>' +
-                '<p>' + location.country + '</p>' +
-                '</li>');
-            });      
-        $('.locations ul').listview('refresh');
-    });
+
+function onDeviceReady() {
+     navigator.splashscreen.hide();
+
+  //    $('.locations ul li').remove();
+	 // $.getJSON('http://192.168.2.6:3001/locations.json', function(data) {    
+
+  //            $.each(data, function(index, location) {                   
+  //               $('.locations ul').append('<li>' +
+  //               '<h4>' + location.name + '</h4>' +
+  //               '<p>' + location.country + '</p>' +
+  //               '</li>');
+  //           });      
+  //       $('.locations ul').listview('refresh');
+  //   });
 }	
 
 
