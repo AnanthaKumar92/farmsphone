@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/jquerymobile.nativedroid.css" />
     <link rel="stylesheet" href="css/jquerymobile.nativedroid.light.css"  id='jQMnDTheme' />
     <link rel="stylesheet" href="css/jquerymobile.nativedroid.color.green.css" id='jQMnDColor' />
+    <link rel="stylesheet" href="css/smartadmin-production.css" id='jQMnDColor' />
    	<link rel="stylesheet" href="css/custom.css" />
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
@@ -30,9 +31,14 @@
             <div role="main" class="ui-content">
              <ul data-role="listview" data-inset="true">
               <fieldset>
-                <li data-role="fieldcontain">
+                <li data-role="fieldcontain"><div class="form-group">
+                <div class=" input-group">
                   <label for="shipment_date_of_shipment_1i">Date of shipment</label>
+                  <label class="input"> <i class="icon-calendar"></i>
                   <input id="shipment_date_of_shipment_1i" name="shipment[date_of_shipment(1i)]" type="date">
+                  
+                  </div></div>
+
                 </li>
                 <li data-role="fieldcontain">
                   <label for="shipment_number_of_pigs">Number of pigs</label>

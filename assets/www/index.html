@@ -35,15 +35,16 @@
     </div><!-- /header -->
       <div data-role="content">
         <form accept-charset="UTF-8" data-ajax="false" class="smart-form smart-form client-form" id="new_user_session" method="post" novalidate="novalidate">
-          <div style="margin:0;padding:0;display:inline"></div>
-          <img src="images/mobile-logo.png">
+          <div style="text-align: center;">
+          <img src="images/mobile-logo.png"></div>
+          <div style="text-align: center;">
           <ul data-role="listview" data-inset="true">
             <li data-role="fieldcontain">
-              <label class="label" style="font-size:14px">User Name</label>
+              <label class="label" style="font-size:14px">User Name</label><br/>
               <input id="user_session_username" name="user_session[username]" placeholder="username" size="30" type="text"  required='required' />
             </li>
             <li data-role="fieldcontain">
-              <label class="label" style="font-size:14px">Password</label>
+              <label class="label" style="font-size:14px">Password</label><br/>
               <input id="user_session_password" name="user_session[password]" placeholder="password" size="30" required='required' type="password" />
             </li>
             <footer style="background:none;border:none">
@@ -51,7 +52,8 @@
                 Sign in
               </button>
             </footer>
-          </ul>  
+          </ul> 
+          </div> 
         </form>
       </div>
     </div>
