@@ -2,8 +2,8 @@ package com.farms.farms;
 
 import android.os.Bundle;
 import org.apache.cordova.*;
-import android.app.Activity;
-import android.view.Menu;
+//import android.app.Activity;
+//import android.view.Menu;
 
 public class FarmActivity extends DroidGap{
     @Override
