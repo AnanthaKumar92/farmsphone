@@ -3,7 +3,7 @@ function onLoad() {
 }
 
 function onDeviceReady() {
-
+  navigator.splashscreen.hide();
   //    $('.locations ul li').remove();
 	 // $.getJSON('http://192.168.2.6:3001/locations.json', function(data) {    
 
