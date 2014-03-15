@@ -7,7 +7,7 @@
   <description>
     Farms
   </description>
-  <preference name="phonegap-version" value="2.0.0" />
+  <preference name="phonegap-version" value="3.1.0" />
 
   <!-- Icons -->
   <icon src="icon.png" />
