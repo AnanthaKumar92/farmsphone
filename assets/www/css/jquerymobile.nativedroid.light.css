@@ -21,7 +21,7 @@
 }
 
 .ui-listview .ui-bar-b {
-	color: #404040;
+	color: #C1C1C1;
 	border-bottom: 2px solid rgba(0,0,0,0.2);
 	text-transform: uppercase;
 }
@@ -66,7 +66,7 @@ progress::-webkit-progress-bar {
 }
 
 .ui-body-b .ui-li-static {
-	border-bottom: 1px solid rgba(0,0,0,0.1);
+	/*border-bottom: 1px solid rgba(0,0,0,0.1);*/
 }
 
 .ui-body-b form .ui-btn,.ui-body-b form .ui-mini.ui-checkbox-off,.ui-body-b form .ui-mini.ui-radio-off {

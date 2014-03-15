@@ -15,7 +15,7 @@
     <script src="js/nativedroid.script.js"></script>
     <script src="js/authorize_page.js"></script>
 
-    <script  charset="utf-8" src="js/cordova-2.0.0.js"></script>
+    <script  charset="utf-8" src="js/cordova-2.9.0.js"></script>
     <script type="text/javascript">
 
       jQuery(window).load(function() {
@@ -28,7 +28,40 @@
 
     </script>
     <style>
-      #heading
+      .Absolute-Center { 
+  height: 50%; /* Set your own height: percents, ems, whatever! */
+  width: 50%; /* Set your own width: percents, ems, whatever! */
+  overflow: auto; /* Recommended in case content is larger than the container */
+  margin: auto; /* Center the item vertically & horizontally */
+  position: absolute; /* Break it out of the regular flow */
+  top: 0; left: 0; bottom: 0; right: 0; /* Set the bounds in which to center it, relative to its parent/container */
+}
+
+
+/* //////////////////////////////////////// */
+/* Make sure our center blocks stay in their container! */
+.Center-Container { position: relative; }
+
+
+/* //////////////////////////////////////// */
+/* Fixed floating element within viewport */
+.Absolute-Center.is-Fixed { 
+  position: fixed;
+  z-index: 999;
+}
+
+
+/* //////////////////////////////////////// */
+/* Min/Max Width */
+.Absolute-Center.is-Responsive {
+  width: 60%; 
+  height: 60%;
+  min-width: 200px;
+  max-width: 400px;
+  padding: 40px;
+}
+
+        #heading
       {
         background-color: #0071BC;
         color: white;
